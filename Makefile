@@ -24,7 +24,7 @@ kill-server:
 
 server:
 	$(VENV_ACTIVATE); \
-	python server.py
+	UVICORN_PORT=$(PORT) python server.py
 
 build-docker:
 	docker build -t $(DOCKER_TAG) .
@@ -34,6 +34,7 @@ docker-server: build-docker
 	docker run -it --rm \
 	--name $(REPO_NAME) \
 	-p $(PORT):$(PORT) \
+	-e UVICORN_PORT=$(PORT) \
 	$(DOCKER_TAG)
 
 docker-server-persist: build-docker
@@ -52,3 +53,6 @@ docker-logs:
 
 tests:
 	pytest
+
+ngrok:
+	$(HOME)/ngrok/ngrok http $(PORT)
