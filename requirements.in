@@ -2,4 +2,4 @@ requests
 fastapi
 gunicorn
 uvicorn
-pandas
+xmltodict

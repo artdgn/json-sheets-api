@@ -3,8 +3,6 @@ import logging
 import os
 import sys
 
-import pandas as pd
-
 ROOT_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../..')
 
 
@@ -29,12 +27,3 @@ def console_handler():
 
 
 logging.basicConfig(handlers=[console_handler()])
-
-
-# pandas options
-def pandas_options():
-    pd.set_option('display.max_colwidth', 300)
-    pd.set_option('display.max_rows', None)
-    pd.set_option('display.max_columns', None)
-    pd.set_option('display.width', None)
-    pd.set_option('display.precision', 3)
