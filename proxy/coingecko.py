@@ -13,7 +13,7 @@ class Client:
     ADDRESS = 'https://api.coingecko.com/api/v3/'
 
     # cache management
-    CACHE_TTL_SEC = 7 * 86400  # 7 days
+    CACHE_TTL_SEC = 86400  # 1 day
     _cache_time: float = 0
 
     # lazy loading and class state
@@ -27,22 +27,24 @@ class Client:
             self._sym_to_id = {d['symbol'].lower(): d['id'] for d in self._coins}
             self._id_to_sym = {d['id']: d['symbol'] for d in self._coins}
 
-    @property
-    def symbol_id_map(self) -> Dict[str, str]:
-        """
-        :return: dict of ticker symbols to CoinGecko ids
-        """
+    def _symbols_to_ids(self, symbols: List[str]):
         self._load_coins_data()
-        return self._sym_to_id
+        ids = []
+        for sym in symbols:
+            id = self._sym_to_id.get(sym.lower())
+            if not id:
+                raise ValueError(f'"{sym.lower()}" not found in CoinGecko ids')
+            ids.append(id)
+        return ids
 
-    def prices_for_symbols(self, symbols: str, currency: str) -> List[float]:
+    def prices_for_symbols(self, symbols: List[str], currency: str) -> List[float]:
         """
         :param symbols: list of ticker symbol strings (e.g. `btc`) that are
             translated to CoinGecko ids (e.g. `bitcoin`) to make the requests.
         :param currency: e.g. `usd`
         :return: list of floats
         """
-        ids = list(map(self.symbol_id_map.get, symbols.lower().split()))
+        ids = self._symbols_to_ids(symbols)
         res = requests.get(
             f'{self.ADDRESS}/simple/price',
             params={

@@ -20,6 +20,7 @@ def parser() -> argparse.ArgumentParser:
 
 if __name__ == '__main__':
     args = parser().parse_args()
+    symbols = args.symbols.split()
     prices = coingecko.Client().prices_for_symbols(
-        symbols=args.symbols, currency=args.currency)
+        symbols=symbols, currency=args.currency)
     print('\n'.join([str(p) for p in prices]))
