@@ -1,11 +1,12 @@
 # CoinGecko API proxy for Google Sheets:
 
 Using CoinGecko API in Sheets to get price data by just using ImportXML e.g.
-`=importxml("https://your-api-address/xml/price/btc","result")`
+> `=importxml("https://your-api-address/xml/price/btc","result")`
 
 ## API usage
 
 ### Local API via tunneling (e.g using [ngrok](https://ngrok.com/)):
+
 #### Run the API locally:
 <details><summary> With local python </summary>
 
@@ -27,6 +28,7 @@ Using CoinGecko API in Sheets to get price data by just using ImportXML e.g.
 
 </details>
 
+
 #### Set up tunnelling:    
 For the API to be accessible from Sheets it needs to be publicly accessible 
 (because google is making the requests not from your local machine).
@@ -37,8 +39,10 @@ is via [ngrok](https://ngrok.com/) tunelling (or any other similar alternative).
     if ngrok lives in `~/ngrok/` and you're using the default port of 9000. If you have the local 
     repo, you can also just `make ngrok` to run this command.
     
+
 #### Usage in Sheets:
-In Sheets, use ImportXML function to talk to the api: e.g. in a cell `=importxml("https://your-ngrok-temp-address.io/xml/price/btc","result")`.
+In Sheets, use ImportXML function to talk to the api: e.g. in a cell:
+> `=importxml("https://your-ngrok-temp-address.io/xml/price/btc","result")`.
  
 For full documentation (live OpenAPI) go to `https://your-api-address/docs`.
 E.g. for currencies other than USD add `?currency=aud` (e.g. for AUD).

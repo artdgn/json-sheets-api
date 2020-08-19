@@ -1,0 +1,1 @@
+web: UVICORN_PORT=$PORT python server.py
