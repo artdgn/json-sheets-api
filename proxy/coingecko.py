@@ -44,6 +44,7 @@ class Client:
         :param currency: e.g. `usd`
         :return: list of floats
         """
+        currency = currency.lower()
         ids = self._symbols_to_ids(symbols)
         res = requests.get(
             f'{self.ADDRESS}/simple/price',
