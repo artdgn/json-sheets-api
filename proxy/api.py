@@ -11,6 +11,12 @@ logger = logging.getLogger(__name__)
 app = fastapi.FastAPI(title='CoinGecko XML proxy')
 
 
+@app.get('/')
+def health():
+    """Just a text response"""
+    return 'home'
+
+
 @app.get("/xml/price/{ticker}", response_class=responses.PlainTextResponse)
 def xml_price(ticker: str, currency: str = 'usd') -> str:
     """
