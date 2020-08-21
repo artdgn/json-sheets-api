@@ -1,3 +1,5 @@
+![CI](https://github.com/artdgn/coingecko-sheets/workflows/CI/badge.svg)
+
 # CoinGecko API proxy for Google Sheets:
 Using CoinGecko API in Sheets to get price data by just using ImportXML.
 
