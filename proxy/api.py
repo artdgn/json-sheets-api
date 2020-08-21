@@ -11,10 +11,14 @@ logger = logging.getLogger(__name__)
 app = fastapi.FastAPI(title='CoinGecko XML proxy')
 
 
-@app.get('/')
+@app.get('/', response_class=responses.HTMLResponse)
 def health():
-    """Just a text response"""
-    return 'home'
+    """Just a welcome text"""
+    return """
+        Welcome!<br>
+        <a href="/docs">Docs UI</a>?<br>
+        <a href="https://github.com/artdgn/coingecko-sheets" target="_blank">GitHub</a>?
+        """
 
 
 @app.get("/xml/price/{ticker}", response_class=responses.PlainTextResponse)

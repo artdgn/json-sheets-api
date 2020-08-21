@@ -11,6 +11,13 @@ def api_client():
 
 
 @pytest.mark.integration
+def test_health(api_client):
+    res = api_client.get('/')
+    assert res.ok
+    assert '/docs' in res.text
+
+
+@pytest.mark.integration
 class TestXMLPrice:
     route = 'xml/price'
 
