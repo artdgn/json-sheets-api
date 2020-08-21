@@ -63,5 +63,3 @@ def xml_get_json(url: str) -> str:
     except Exception as e:
         result  = f'error: {str(e)}'
     return xmltodict.unparse({'result': result}, pretty=True)
-
-

@@ -1,10 +1,8 @@
-![CI](https://github.com/artdgn/coingecko-sheets/workflows/CI/badge.svg)
-
-# CoinGecko API proxy for Google Sheets:
-Using CoinGecko API in Sheets to get price data by just using ImportXML.
+# CoinGecko API proxy for Google Sheets  ![CI](https://github.com/artdgn/coingecko-sheets/workflows/CI/badge.svg)
+Using CoinGecko API in Sheets to get cryptocurrency price data by using ImportXML.
 
 ## Usage in Sheets:
-In Sheets, use ImportXML function to talk to the api: e.g. in a cell:
+In Sheets, use [ImportXML](https://support.google.com/docs/answer/3093342?hl=en) function to talk to the api: e.g. in a cell:
 > `=importxml("https://your-api-address/xml/price/btc","result")`.
  
 ![](https://artdgn.github.io/images/coingecko-sheets.gif)

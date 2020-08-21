@@ -23,4 +23,5 @@ if __name__ == '__main__':
     symbols = args.symbols.split()
     prices = coingecko.Client().prices_for_symbols(
         symbols=symbols, currency=args.currency)
+    print('  prices:')
     print('\n'.join([str(p) for p in prices]))

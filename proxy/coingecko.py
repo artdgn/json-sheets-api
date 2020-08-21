@@ -46,6 +46,8 @@ class Client:
         """
         currency = currency.lower()
         ids = self._symbols_to_ids(symbols)
+        print('  ids:')
+        print('\n'.join([str(id) for id in ids]))
         res = requests.get(
             f'{self.ADDRESS}/simple/price',
             params={
