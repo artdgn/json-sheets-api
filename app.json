@@ -1,6 +1,5 @@
 {
-    "name": "CoinGecko-sheets",
-    "description": "CoinGecko API proxy for Google Sheets",
-    "repository": "https://github.com/artdgn/coingecko-sheets",
-  }
-  
+  "name": "CoinGecko-sheets",
+  "description": "CoinGecko API proxy for Google Sheets",
+  "repository": "https://github.com/artdgn/coingecko-sheets"
+}
