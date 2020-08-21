@@ -44,3 +44,28 @@ class TestXMLPrice:
 
         # test may be flaky, assumes there is no "bla-bla" coin
         assert 'not found' in result
+
+
+@pytest.mark.integration
+class TestXMLGetJSON:
+    route = 'xml/get'
+
+    def test_xml_get_json(self, api_client):
+        url = 'https://api.icndb.com/jokes/random'
+        res = api_client.get(f'{self.route}', params=dict(url=url))
+        assert res.ok
+        data = xmltodict.parse(res.text)
+
+        # test may be flaky, Chuck Norris doesn't have to be
+        # part of a Chuck Norris joke if he doesn't feel like it
+        assert 'chuck' in data['result']['value']['joke'].lower()
+
+    @pytest.mark.parametrize('url', [
+        'https://api.icndb.com/',  # url not returning a JSON
+        'https://anskjvas/'  # HTTP error
+    ])
+    def test_xml_get_json_errors(self, api_client, url):
+        res = api_client.get(f'{self.route}', params=dict(url=url))
+        assert res.ok
+        data = xmltodict.parse(res.text)
+        assert 'error' in data['result']
