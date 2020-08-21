@@ -1,7 +1,5 @@
 # CoinGecko API proxy for Google Sheets:
-
-Using CoinGecko API in Sheets to get price data by just using ImportXML e.g.
-> `=importxml("https://your-api-address/xml/price/btc","result")`
+Using CoinGecko API in Sheets to get price data by just using ImportXML.
 
 ## Usage in Sheets:
 In Sheets, use ImportXML function to talk to the api: e.g. in a cell:
@@ -10,12 +8,15 @@ In Sheets, use ImportXML function to talk to the api: e.g. in a cell:
 For full documentation (live OpenAPI) go to `https://your-api-address/docs`.
 E.g. for currencies other than USD add `?currency=aud` (e.g. for AUD).
 
+![](https://artdgn.github.io/images/coingecko-sheets.gif)
+
+
 ## Running the API
 For the API to be accessible from Sheets it needs to be publicly accessible 
 (because Google is making the requests not from your local machine).
 
 ### Host API on Heroku
-> This option is easiest for actual usage.
+> This option is easiest for actual usage (the free tier should be enough).
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/artdgn/coingecko-sheets)
 
