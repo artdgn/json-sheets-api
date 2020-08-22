@@ -61,7 +61,7 @@ class TestXMLGetJSON:
         assert 'chuck' in data['result']['value']['joke'].lower()
 
     @pytest.mark.parametrize('url', [
-        'https://api.icndb.com/',  # url not returning a JSON
+        'https://jsonplaceholder.typicode.com/',  # url not returning a JSON
         'https://anskjvas/'  # HTTP error
     ])
     def test_xml_get_json_errors(self, api_client, url):
@@ -69,3 +69,35 @@ class TestXMLGetJSON:
         assert res.ok
         data = xmltodict.parse(res.text)
         assert 'error' in data['result']
+
+    def test_xml_get_json_multiple_params(self, api_client):
+        res = api_client.get(
+            f'{self.route}',
+            params=dict(
+                url='https://api.coingecko.com/api/v3/simple/price?'
+                    'ids=bitcoin&vs_currencies=aud',
+            ))
+        data = xmltodict.parse(res.text)
+        # vs_currencies parameter was not ignored
+        assert data['result']['bitcoin']['aud']
+
+    def test_xml_get_json_jsonpath(self, api_client):
+        url = 'https://jsonplaceholder.typicode.com/posts/1/comments'
+        res = api_client.get(f'{self.route}',
+                             params=dict(url=url, jsonpath='[1].email'))
+        data = xmltodict.parse(res.text)
+        assert '@' in data['result'].lower()
+
+    @pytest.mark.parametrize('url', [
+        'https://jsonplaceholder.typicode.com/posts/1',
+        'https://jsonplaceholder.typicode.com/posts/1/comments',
+    ])
+    @pytest.mark.parametrize('jsonpath', [
+        '/#$',
+        '[10].email'
+    ])
+    def test_xml_get_json_jsonpath_errors(self, api_client, url, jsonpath):
+        res = api_client.get(f'{self.route}', params=dict(url=url, jsonpath=jsonpath))
+        data = xmltodict.parse(res.text)
+        assert data
+        assert 'jsonpath-error' in res.text

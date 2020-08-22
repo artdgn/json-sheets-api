@@ -1,5 +1,5 @@
 import time
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 import requests
 
@@ -37,21 +37,22 @@ class Client:
             ids.append(id)
         return ids
 
-    def prices_for_symbols(self, symbols: List[str], currency: str) -> List[float]:
+    def prices_for_symbols(
+            self, symbols: List[str], currency: str) -> Tuple[List[float], List[str]]:
         """
         :param symbols: list of ticker symbol strings (e.g. `btc`) that are
             translated to CoinGecko ids (e.g. `bitcoin`) to make the requests.
         :param currency: e.g. `usd`
-        :return: list of floats
+        :return: tuple (list of float prices, list of string ids)
         """
         currency = currency.lower()
         ids = self._symbols_to_ids(symbols)
-        print('  ids:')
-        print('\n'.join([str(id) for id in ids]))
         res = requests.get(
             f'{self.ADDRESS}/simple/price',
             params={
                 'ids': ','.join(ids),
                 'vs_currencies': currency,
             }).json()
-        return [res[id][currency] for id in ids]
+        prices = [res[id][currency] for id in ids]
+        ids = [str(id) for id in ids]
+        return prices, ids
