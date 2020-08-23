@@ -1,5 +1,5 @@
 {
-  "name": "CoinGecko-sheets",
-  "description": "CoinGecko API proxy for Google Sheets",
-  "repository": "https://github.com/artdgn/coingecko-sheets"
+  "name": "Crypto-sheets-API",
+  "description": "Crypto-currency data API proxy for Google Sheets",
+  "repository": "https://github.com/artdgn/crypto-sheets-api"
 }

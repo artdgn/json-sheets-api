@@ -20,7 +20,7 @@ def health():
     return """
         Welcome!<br>
         <a href="/docs">Docs UI</a>?<br>
-        <a href="https://github.com/artdgn/coingecko-sheets" target="_blank">GitHub</a>?
+        <a href="https://github.com/artdgn/crypto-sheets-api" target="_blank">GitHub</a>?
         """
 
 

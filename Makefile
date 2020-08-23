@@ -1,4 +1,4 @@
-REPO_NAME=coingecko-sheets
+REPO_NAME=crypto-sheets-api
 VENV_ACTIVATE=. .venv/bin/activate
 PYTHON=.venv/bin/python
 DOCKER_TAG=artdgn/$(REPO_NAME)

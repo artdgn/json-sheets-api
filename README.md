@@ -1,7 +1,7 @@
-![CI](https://github.com/artdgn/coingecko-sheets/workflows/CI/badge.svg) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/artdgn/coingecko-sheets?label=dockerhub&logo=docker) ![GitHub deployments](https://img.shields.io/github/deployments/artdgn/coingecko-sheets/coingecko-sheets?label=heroku&logo=heroku)
+![CI](https://github.com/artdgn/crypto-sheets-api/workflows/CI/badge.svg) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/artdgn/crypto-sheets-api?label=dockerhub&logo=docker) ![GitHub deployments](https://img.shields.io/github/deployments/artdgn/crypto-sheets-api/crypto-sheets-api?label=heroku&logo=heroku)
 
 
-# CoinGecko API proxy for Google Sheets  
+# Cryptocurrency data API for Google Sheets  
 Using CoinGecko API in Sheets to get cryptocurrency price data.
 
 ## Basic usage
@@ -10,12 +10,12 @@ Use [ImportXML](https://support.google.com/docs/answer/3093342?hl=en) to
 get basic price data:
 > `=importxml("https://your-api-address/coingecko/xml/price/btc","result")`.
  
-![](https://artdgn.github.io/images/coingecko-sheets.gif)
+![](https://artdgn.github.io/images/crypto-sheets-api.gif)
 
 For full documentation of proxy endpoints (live OpenAPI) go to `https://your-api-address/docs`
 
 ## Live example API and Sheet:
-- [Example API on Heroku](https://coingecko-sheets.herokuapp.com) free tier, use only as example, otherwise throttling and free tier limits will make it unusable.
+- [Example API on Heroku](https://crypto-sheets-api.herokuapp.com) free tier, use only as example, otherwise throttling and free tier limits will make it unusable.
 - [Example Sheet](https://docs.google.com/spreadsheets/d/1cY8n9s1QnW7HQuMdJjihjpKlVSit2kRAT7oe7lFySLg/edit?usp=sharing) with the examples from this readme.
 
 ## Advanced usage (for other API routes or params)
@@ -80,30 +80,30 @@ For the API to be accessible from Sheets it needs to be publicly accessible
 ### Host API on Heroku
 > This option is best for actual usage (the free tier should be enough). Also best in terms of privacy
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/artdgn/coingecko-sheets)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/artdgn/crypto-sheets-api)
 
 
 ### Run API locally and expose publicly via [ngrok](https://ngrok.com/):
 > This option is best for development or temporary usage (free as well).
 
 #### 1. Run the API locally:
-<details><summary> Local python (instructions) </summary>
+<details><summary> Local python option </summary>
 
 1. Install in local virtual env after cloning: `make install`
 2. Run local server: `make server`
 
 </details>
 
-<details><summary> Docker with local code (instructions) </summary>
+<details><summary> Docker with local code option </summary>
 
 1. After cloning: `make docker-server`
 
 </details>
     
     
-<details><summary> Docker without cloning repo (instructions) </summary>
+<details><summary> Docker without cloning repo option </summary>
 
-1. `docker run -it --rm -p 9000:9000 artdgn/coingecko-sheets` (or `-p 1234:9000` to run on different port)
+1. `docker run -it --rm -p 9000:9000 artdgn/crypto-sheets-api` (or `-p 1234:9000` to run on different port)
 
 </details>
 
@@ -123,7 +123,7 @@ For the API to be accessible from Sheets it needs to be publicly accessible
 - Copy your column of ticker symbols from sheets.
 - Run:
     - Local python virtual environment: `python cli.py "<paste-here>"` (paste before closing the quote)
-    - Docker: `docker run -it --rm artdgn/coingecko-sheets python cli.py "<paste-here>"` 
+    - Docker: `docker run -it --rm artdgn/crypto-sheets-api python cli.py "<paste-here>"` 
 - Copy paste from terminal output back into sheets. 
 
 </details>
