@@ -1,4 +1,7 @@
-# CoinGecko API proxy for Google Sheets  ![CI](https://github.com/artdgn/coingecko-sheets/workflows/CI/badge.svg)
+![CI](https://github.com/artdgn/coingecko-sheets/workflows/CI/badge.svg) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/artdgn/coingecko-sheets?label=dockerhub&logo=docker) ![GitHub deployments](https://img.shields.io/github/deployments/artdgn/coingecko-sheets/coingecko-sheets?label=heroku&logo=heroku)
+
+
+# CoinGecko API proxy for Google Sheets  
 Using CoinGecko API in Sheets to get cryptocurrency price data by using ImportXML.
 
 ## Usage in Sheets:
