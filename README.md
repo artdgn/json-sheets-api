@@ -6,7 +6,7 @@ Using CoinGecko API in Sheets to get cryptocurrency price data by using ImportXM
 
 ## Usage in Sheets:
 In Sheets, use [ImportXML](https://support.google.com/docs/answer/3093342?hl=en) function to talk to the api: e.g. in a cell:
-> `=importxml("https://your-api-address/xml/price/btc","result")`.
+> `=importxml("https://your-api-address/coingecko/xml/price/btc","result")`.
  
 ![](https://artdgn.github.io/images/coingecko-sheets.gif)
 

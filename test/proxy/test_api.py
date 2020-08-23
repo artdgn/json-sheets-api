@@ -18,10 +18,10 @@ def test_health(api_client):
 
 
 @pytest.mark.integration
-class TestXMLPrice:
-    route = 'xml/price'
+class TestCoingeckoXMLPrice:
+    route = 'coingecko/xml/price'
 
-    def test_xml_price_basic(self, api_client):
+    def test_basic(self, api_client):
         res = api_client.get(f'{self.route}/btc')
         assert res.ok
         data = xmltodict.parse(res.text)
@@ -29,7 +29,7 @@ class TestXMLPrice:
         # test may be flaky, assumes bitcoin didn't go to zero
         assert float(data['result']) > 0
 
-    def test_xml_price_currency(self, api_client):
+    def test_currency(self, api_client):
         default = api_client.get(f'{self.route}/btc')
         in_aud = api_client.get(f'{self.route}/btc?currency=aud')
         price_default = float(xmltodict.parse(default.text)['result'])
@@ -38,7 +38,7 @@ class TestXMLPrice:
         # test may be flaky, assumes AUD is worth less than USD
         assert price_aud > price_default
 
-    def test_xml_price_error(self, api_client):
+    def test_error(self, api_client):
         res = api_client.get(f'{self.route}/bla-bla')
         result = xmltodict.parse(res.text)['result']
 
@@ -50,7 +50,7 @@ class TestXMLPrice:
 class TestXMLGetJSON:
     route = 'xml/get'
 
-    def test_xml_get_json(self, api_client):
+    def test_basic(self, api_client):
         url = 'https://api.icndb.com/jokes/random'
         res = api_client.get(f'{self.route}', params=dict(url=url))
         assert res.ok
@@ -64,13 +64,13 @@ class TestXMLGetJSON:
         'https://jsonplaceholder.typicode.com/',  # url not returning a JSON
         'https://anskjvas/'  # HTTP error
     ])
-    def test_xml_get_json_errors(self, api_client, url):
+    def test_json_errors(self, api_client, url):
         res = api_client.get(f'{self.route}', params=dict(url=url))
         assert res.ok
         data = xmltodict.parse(res.text)
         assert 'error' in data['result']
 
-    def test_xml_get_json_multiple_params(self, api_client):
+    def test_multiple_params(self, api_client):
         res = api_client.get(
             f'{self.route}',
             params=dict(
@@ -81,7 +81,7 @@ class TestXMLGetJSON:
         # vs_currencies parameter was not ignored
         assert data['result']['bitcoin']['aud']
 
-    def test_xml_get_json_jsonpath(self, api_client):
+    def test_jsonpath(self, api_client):
         url = 'https://jsonplaceholder.typicode.com/posts/1/comments'
         res = api_client.get(f'{self.route}',
                              params=dict(url=url, jsonpath='[1].email'))
@@ -96,8 +96,29 @@ class TestXMLGetJSON:
         '/#$',
         '[10].email'
     ])
-    def test_xml_get_json_jsonpath_errors(self, api_client, url, jsonpath):
+    def test_jsonpath_errors(self, api_client, url, jsonpath):
         res = api_client.get(f'{self.route}', params=dict(url=url, jsonpath=jsonpath))
         data = xmltodict.parse(res.text)
         assert data
         assert 'jsonpath-error' in res.text
+
+
+@pytest.mark.integration
+class TestDatapointGet:
+    route = 'datapoint/get'
+
+    def test_basic_jsonpath(self, api_client):
+        url = 'https://jsonplaceholder.typicode.com/posts/1/comments'
+        res = api_client.get(f'{self.route}',
+                             params=dict(url=url, jsonpath='[1].email'))
+        assert '@' in res.text
+
+    @pytest.mark.parametrize('jsonpath, error_text', [
+        ('/#$', 'Unexpected character'),
+        ('[10].email', 'not found'),
+        ('[*].email', 'more than one'),
+    ])
+    def test_jsonpath_errors(self, api_client, jsonpath, error_text):
+        url = 'https://jsonplaceholder.typicode.com/posts/1/comments'
+        res = api_client.get(f'{self.route}', params=dict(url=url, jsonpath=jsonpath))
+        assert 'error' in res.text and error_text in res.text
