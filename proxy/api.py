@@ -7,11 +7,9 @@ import requests
 import xmltodict
 from starlette import responses
 
-from proxy import coingecko
-
 logger = logging.getLogger(__name__)
 
-app = fastapi.FastAPI(title='CoinGecko XML proxy')
+app = fastapi.FastAPI(title='ImportJSON API for Google Sheets')
 
 
 @app.get('/', response_class=responses.HTMLResponse)
@@ -20,31 +18,8 @@ def health():
     return """
         Welcome!<br>
         <a href="/docs">Docs UI</a>?<br>
-        <a href="https://github.com/artdgn/crypto-sheets-api" target="_blank">GitHub</a>?
+        <a href="https://github.com/artdgn/sheets-import-json-api" target="_blank">GitHub</a>?
         """
-
-
-@app.get("/coingecko/xml/price/{symbol}", response_class=responses.PlainTextResponse)
-def xml_price(symbol: str, currency: str = 'usd') -> str:
-    """
-    Return price for ticker symbol in XML format for usage in google sheets.
-
-    ### Parameters:
-    - symbol: coin (ticker) symbol (e.g. btc)
-    - currency: currency for price
-
-    ### Returns:
-    XML with just "price" as the only element
-
-    ### Example usage in Sheets:
-    `=importxml("https://your-api-address/coingecko/xml/price/btc","result")`
-    """
-    try:
-        prices, _ = coingecko.Client().prices_for_symbols([symbol], currency=currency)
-        result = prices[0]
-    except Exception as e:
-        result = f'error: {str(e)}'
-    return xmltodict.unparse({'result': result}, pretty=True)
 
 
 @app.get("/xml/get", response_class=responses.PlainTextResponse)

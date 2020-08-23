@@ -1,5 +1,5 @@
 {
-  "name": "Crypto-sheets-API",
-  "description": "Crypto-currency data API proxy for Google Sheets",
-  "repository": "https://github.com/artdgn/crypto-sheets-api"
+  "name": "Sheets-Import-JSON-API",
+  "description": "Use any JSON API in Google Sheets. ",
+  "repository": "https://github.com/artdgn/sheets-import-json-api"
 }

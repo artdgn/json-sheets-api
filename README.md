@@ -1,32 +1,21 @@
-![CI](https://github.com/artdgn/crypto-sheets-api/workflows/CI/badge.svg) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/artdgn/crypto-sheets-api?label=dockerhub&logo=docker) ![GitHub deployments](https://img.shields.io/github/deployments/artdgn/crypto-sheets-api/crypto-sheets-api?label=heroku&logo=heroku)
+![CI](https://github.com/artdgn/sheets-import-json-api/workflows/CI/badge.svg) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/artdgn/sheets-import-json-api?label=dockerhub&logo=docker) ![GitHub deployments](https://img.shields.io/github/deployments/artdgn/sheets-import-json-api/sheets-import-json-api?label=heroku&logo=heroku)
 
 
-# Cryptocurrency data API for Google Sheets  
-Using CoinGecko API in Sheets to get cryptocurrency price data.
-
-## Basic usage
-
-Use [ImportXML](https://support.google.com/docs/answer/3093342?hl=en) to 
-get basic price data:
-> `=importxml("https://your-api-address/coingecko/xml/price/btc","result")`.
- 
-![](https://artdgn.github.io/images/crypto-sheets-api.gif)
-
-For full documentation of proxy endpoints (live OpenAPI) go to `https://your-api-address/docs`
+# ImportJSON API for Google Sheets
+Use any JSON API in Google Sheets by using ImportXML / ImportDATA and a proxy API.
 
 ## Live example API and Sheet:
-- [Example API on Heroku](https://crypto-sheets-api.herokuapp.com) free tier, use only as example, otherwise throttling and free tier limits will make it unusable.
-- [Example Sheet](https://docs.google.com/spreadsheets/d/1cY8n9s1QnW7HQuMdJjihjpKlVSit2kRAT7oe7lFySLg/edit?usp=sharing) with the examples from this readme.
+- [Example API on Heroku](https://sheets-import-json-api.herokuapp.com) free tier, use only as example, otherwise throttling and free tier limits will make it unusable.
+- Example Sheet (WIP) with the examples from this readme.
 
-## Advanced usage (for other API routes or params)
-Use `/xml/get` or `/datapoint/get` to import data from any other API URL that returns a JSON.
+## Usage
+Use `/xml/get` or `/datapoint/get` to import data from any API URL that returns a JSON.
 
-For any other data from CoinGecko API use [CoinGecko API live docs](https://www.coingecko.com/ja/api#explore-api) to create your target URL.
+Example: to extract some specifi data from CoinGecko API use [CoinGecko API live docs](https://www.coingecko.com/ja/api#explore-api) to create a target URL.
 
 > Example: Use `coins/{id}/history` to get a particular date's price: `https://api.coingecko.com/api/v3/coins/bitcoin/history?date=17-12-2017`
 
 <details><summary> Using JSONPath and ImportXML </summary>
-
 
 > JSONPath should be preferred because not every valid JSON can be converted into XML (e.g. if some keys start with numbers).
 
@@ -80,7 +69,7 @@ For the API to be accessible from Sheets it needs to be publicly accessible
 ### Host API on Heroku
 > This option is best for actual usage (the free tier should be enough). Also best in terms of privacy
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/artdgn/crypto-sheets-api)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/artdgn/sheets-import-json-api)
 
 
 ### Run API locally and expose publicly via [ngrok](https://ngrok.com/):
@@ -103,7 +92,7 @@ For the API to be accessible from Sheets it needs to be publicly accessible
     
 <details><summary> Docker without cloning repo option </summary>
 
-1. `docker run -it --rm -p 9000:9000 artdgn/crypto-sheets-api` (or `-p 1234:9000` to run on different port)
+1. `docker run -it --rm -p 9000:9000 artdgn/sheets-import-json-api` (or `-p 1234:9000` to run on different port)
 
 </details>
 
@@ -117,24 +106,12 @@ For the API to be accessible from Sheets it needs to be publicly accessible
     
 </details>
 
-## Simple manual CLI usage (not API)
-<details><summary>Manual CLI usage instructions</summary>
-
-- Copy your column of ticker symbols from sheets.
-- Run:
-    - Local python virtual environment: `python cli.py "<paste-here>"` (paste before closing the quote)
-    - Docker: `docker run -it --rm artdgn/crypto-sheets-api python cli.py "<paste-here>"` 
-- Copy paste from terminal output back into sheets. 
-
-</details>
-
 
 ## Alternative solutions
 <details><summary>Some other options that didn't work for me</summary>
 
-- [CRYPTOFINANCE](https://cryptofinance.ai) stopped working. In general trying any of the Google App Scripts solutions (like [IMPORTJSON](https://github.com/qeet/IMPORTJSONAPI) or like the updated CRYPTOFINANCE) didn't work for me because of the Auth issues (banged my head against it for a couple of hours and decided to just not use the Google Apps Scripts if making an external request from a script is such a herculian feat).
+- Trying any of the Google App Scripts solutions (like [IMPORTJSON](https://github.com/qeet/IMPORTJSONAPI) didn't work for me because of the Auth issues (banged my head against it for a couple of hours and decided to just not use the Google Apps Scripts if making an external request from a script is such a herculian feat).
 - Other Google Sheet add-ons like [Apipheny](https://apipheny.io/) were either paid or required API keys (so registration, or additional Yak-Shaving).
-- In terms of actual cryptocurrency data APIs: CoinGecko is completely open, no need for API keys (for now?), so I went with it.
 </details>
 
 ## Privacy thoughts
@@ -144,7 +121,7 @@ TL;DR: probably best to host your own.
 
 1. I don't think there's a way to know which accounts are making any of the requests.
 2. Hosting your own proxy API (e.g. on Heroku) is probably the best option since your requests will be visible to your proxy (and Heroku).
-3. Hosting a local proxy API via tunnelling (the "ngrok" option) will mean that requests to CoinGecko (or any other API you're using through this) will come from your machine.
+3. Hosting a local proxy API via tunnelling (the "ngrok" option) will mean that external requests will come from your machine.
 4. Using my example deployment means that I can see the request parameters in the logs (but with no idea about the google accounts).
 
 </details>
