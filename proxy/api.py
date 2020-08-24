@@ -19,7 +19,7 @@ def health():
     return """
         Welcome!<br>
         <a href="/docs">Docs UI</a>?<br>
-        <a href="https://github.com/artdgn/sheets-import-json-api" target="_blank">GitHub</a>?
+        <a href="https://github.com/artdgn/json-sheets-api" target="_blank">GitHub</a>?
         """
 
 

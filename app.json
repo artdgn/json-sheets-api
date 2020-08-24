@@ -1,5 +1,5 @@
 {
-  "name": "Sheets-Import-JSON-API",
-  "description": "Use any JSON API in Google Sheets. ",
-  "repository": "https://github.com/artdgn/sheets-import-json-api"
+  "name": "JSON-Sheets-API",
+  "description": "Use any JSON API in Google Sheets.",
+  "repository": "https://github.com/artdgn/json-sheets-api"
 }

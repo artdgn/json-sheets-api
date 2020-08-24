@@ -1,4 +1,4 @@
-![CI](https://github.com/artdgn/sheets-import-json-api/workflows/CI/badge.svg) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/artdgn/sheets-import-json-api?label=dockerhub&logo=docker) ![GitHub deployments](https://img.shields.io/github/deployments/artdgn/sheets-import-json-api/sheets-import-json-api?label=heroku&logo=heroku)
+![CI](https://github.com/artdgn/json-sheets-api/workflows/CI/badge.svg) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/artdgn/json-sheets-api?label=dockerhub&logo=docker) ![GitHub deployments](https://img.shields.io/github/deployments/artdgn/json-sheets-api/json-sheets-api?label=heroku&logo=heroku)
 
 # ImportJSON API for Google Sheets
 Use any JSON API in Google Sheets by using ImportXML / ImportDATA and a proxy API.
@@ -6,7 +6,7 @@ Use any JSON API in Google Sheets by using ImportXML / ImportDATA and a proxy AP
 ![](https://artdgn.github.io/images/sheets-import-json-api.gif)
 
 ## Live example API and Sheet:
-- [Example API on Heroku](https://sheets-import-json-api.herokuapp.com) free tier, welcome to use as example.
+- [Example API on Heroku](https://json-sheets-api.herokuapp.com) free tier, welcome to use as example.
 - [Example Sheet](https://docs.google.com/spreadsheets/d/1RRnpLPIVuN5KoPVxIYraOcUHicL69hZPaTf7HpM9NU4/edit?usp=sharing) with the examples from this readme.
 
 ## What can this be useful for?
@@ -90,7 +90,7 @@ For the API to be accessible from Sheets it needs to be publicly accessible
 ### Host API on Heroku
 > This option is best for actual usage (the free tier should be enough). Also best in terms of privacy
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/artdgn/sheets-import-json-api)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/artdgn/json-sheets-api)
 
 
 ### Run API locally and expose publicly via [ngrok](https://ngrok.com/):
@@ -113,7 +113,7 @@ For the API to be accessible from Sheets it needs to be publicly accessible
     
 <details><summary> Docker without cloning repo option </summary>
 
-1. `docker run -it --rm -p 9000:9000 artdgn/sheets-import-json-api` (or `-p 1234:9000` to run on different port)
+1. `docker run -it --rm -p 9000:9000 artdgn/json-sheets-api` (or `-p 1234:9000` to run on different port)
 
 </details>
 
