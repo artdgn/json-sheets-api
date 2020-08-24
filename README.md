@@ -9,9 +9,10 @@ Use any JSON API in Google Sheets by using ImportXML / ImportDATA and a proxy AP
 - Example Sheet (WIP) with the examples from this readme.
 
 ## Usage
-Use `/xml/get` or `/datapoint/get` to import data from any API URL that returns a JSON.
+Use `/xml/get` or `/datapoint/get` to import data from any API URL GET endpoint that returns a JSON. 
+Use `/xml/post` or `/datapoint/post` for POST target endpoints.
 
-Example: to extract some specifi data from CoinGecko API use [CoinGecko API live docs](https://www.coingecko.com/ja/api#explore-api) to create a target URL.
+Example: to extract some specific data from the CoinGecko API use [CoinGecko API live docs](https://www.coingecko.com/ja/api#explore-api) to create a target URL.
 
 > Example: Use `coins/{id}/history` to get a particular date's price: `https://api.coingecko.com/api/v3/coins/bitcoin/history?date=17-12-2017`
 
@@ -26,7 +27,9 @@ Example: to extract some specifi data from CoinGecko API use [CoinGecko API live
 
 Example
 ```
-=importxml("https://your-api-address/xml/get?url=https://api.coingecko.com/api/v3/coins/bitcoin/history?date=17-12-2017&jsonpath=market_data.current_price.usd","result")
+=importxml("https://your-api-address/xml/get?
+    url=https://api.coingecko.com/api/v3/coins/bitcoin/history?date=17-12-2017&
+    jsonpath=market_data.current_price.usd","result")
 ```
 
 </details>
@@ -41,7 +44,9 @@ Example
 
 Example: 
 ```
-=importxml("https://your-api-address/xml/get?url=https://api.coingecko.com/api/v3/coins/bitcoin/history?date=17-12-2017","result/market_data/current_price/usd")
+=importxml("https://your-api-address/xml/get?
+    url=https://api.coingecko.com/api/v3/coins/bitcoin/history?date=17-12-2017"
+    ,"result/market_data/current_price/usd")
 ```
 
 </details>
@@ -57,9 +62,23 @@ Follow the same steps as for JSONPath with ImportXML above, but use a `/datapoin
 
 Example
 ```
-=importdata("https://your-api-address/xml/get?url=https://api.coingecko.com/api/v3/coins/bitcoin/history?date=17-12-2017&jsonpath=market_data.current_price.usd")
+=importdata("https://your-api-address/xml/get?
+    url=https://api.coingecko.com/api/v3/coins/bitcoin/history?date=17-12-2017&
+    jsonpath=market_data.current_price.usd")
 ```
+</details>
 
+<details><summary> Using POST target endpoints </summary>
+
+POST endpoints usage (`/xml/post` or `/datapoint/post`) is exactly as their GET counterparts, except a required `body_json` URL paramater is expected to contain the JSON to be sent to the target API. Note that in Sheets quotes in the that JSON need to be doubled to be escaped. 
+
+Example:
+```
+=importxml("https://your-api-address/xml/post?
+        url=https://jsonplaceholder.typicode.com/posts&
+        body_json={""title"":""bla""}",
+        "result/id")
+```
 </details>
 
 ## Running the API

@@ -9,15 +9,16 @@ PORT=9000
 
 requirements: .venv
 	$(VENV_ACTIVATE); \
-	pip install -U pip; \
-	pip install -U pip-tools; \
+	python -m pip install -U pip; \
+	python -m pip install -U pip-tools; \
 	pip-compile requirements.in; \
 	pip-compile requirements[dev].in
 
 install: .venv
 	$(VENV_ACTIVATE); \
-	pip install -r requirements.txt
-	pip install -r requirements[dev].txt
+	python -m pip install -U pip; \
+	python -m pip install -r requirements.txt
+	python -m pip install -r requirements[dev].txt
 
 kill-server:
 	kill -9 `netstat -tulpn | grep $(PORT) | grep -oP "(?<=)\d+(?=\/)"`

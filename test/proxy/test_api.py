@@ -1,3 +1,5 @@
+import json
+
 import pytest
 import xmltodict
 from fastapi import testclient
@@ -75,6 +77,19 @@ class TestXMLGetJSON:
 
 
 @pytest.mark.integration
+class TestXMLPostJSON:
+    route = 'xml/post'
+    body_json = json.dumps({'title': 'bla'})
+
+    def test_basic(self, api_client):
+        url = 'https://jsonplaceholder.typicode.com/posts'
+        res = api_client.get(f'{self.route}',
+                             params=dict(url=url, body_json=self.body_json))
+        data = xmltodict.parse(res.text)
+        assert data['result']['id']
+
+
+@pytest.mark.integration
 class TestDatapointGet:
     route = 'datapoint/get'
 
@@ -93,3 +108,16 @@ class TestDatapointGet:
         url = 'https://jsonplaceholder.typicode.com/posts/1/comments'
         res = api_client.get(f'{self.route}', params=dict(url=url, jsonpath=jsonpath))
         assert 'error' in res.text and error_text in res.text
+
+
+@pytest.mark.integration
+class TestDatapointPost:
+    route = 'datapoint/post'
+    body_json = json.dumps({'title': 'bla'})
+
+    def test_basic(self, api_client):
+        url = 'https://jsonplaceholder.typicode.com/posts'
+        res = api_client.get(f'{self.route}',
+                             params=dict(url=url, body_json=self.body_json, jsonpath="title"))
+        expected_title = json.loads(self.body_json)['title']
+        assert res.text == expected_title
