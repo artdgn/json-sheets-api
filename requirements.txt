@@ -4,27 +4,46 @@
 #
 #    pip-compile requirements.in
 #
-certifi==2020.6.20        # via requests
-chardet==3.0.4            # via requests
-click==7.1.2              # via uvicorn
-dataclasses==0.7          # via pydantic
-decorator==4.4.2          # via jsonpath-ng
-fastapi==0.61.0           # via -r requirements.in
-gunicorn==20.0.4          # via -r requirements.in
-h11==0.9.0                # via uvicorn
-httptools==0.1.1          # via uvicorn
-idna==2.10                # via requests
-jsonpath-ng==1.5.1        # via -r requirements.in
-ply==3.11                 # via jsonpath-ng
-pydantic==1.6.1           # via fastapi
-requests==2.24.0          # via -r requirements.in
-six==1.15.0               # via jsonpath-ng
-starlette==0.13.6         # via fastapi
-urllib3==1.25.10          # via requests
-uvicorn==0.11.8           # via -r requirements.in
-uvloop==0.14.0            # via uvicorn
-websockets==8.1           # via uvicorn
-xmltodict==0.12.0         # via -r requirements.in
+certifi==2022.12.7
+    # via requests
+chardet==3.0.4
+    # via requests
+click==7.1.2
+    # via uvicorn
+decorator==4.4.2
+    # via jsonpath-ng
+fastapi==0.61.0
+    # via -r requirements.in
+gunicorn==20.0.4
+    # via -r requirements.in
+h11==0.9.0
+    # via uvicorn
+httptools==0.1.1
+    # via uvicorn
+idna==2.10
+    # via requests
+jsonpath-ng==1.5.1
+    # via -r requirements.in
+ply==3.11
+    # via jsonpath-ng
+pydantic==1.6.1
+    # via fastapi
+requests==2.24.0
+    # via -r requirements.in
+six==1.15.0
+    # via jsonpath-ng
+starlette==0.13.6
+    # via fastapi
+urllib3==1.25.10
+    # via requests
+uvicorn==0.11.8
+    # via -r requirements.in
+uvloop==0.14.0
+    # via uvicorn
+websockets==8.1
+    # via uvicorn
+xmltodict==0.12.0
+    # via -r requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
